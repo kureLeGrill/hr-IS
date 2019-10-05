@@ -1,0 +1,47 @@
+C:\Users\Ed\Documents\Visual Studio 2015\Projects\C#\Legalizace\LEGAL\LEGAL\bin\Debug\LEGAL.exe.config
+C:\Users\Ed\Documents\Visual Studio 2015\Projects\C#\Legalizace\LEGAL\LEGAL\obj\Debug\LEGAL.csproj.ResolveComReference.cache
+C:\Users\Ed\Documents\Visual Studio 2015\Projects\C#\Legalizace\LEGAL\LEGAL\bin\Debug\LEGAL.exe
+C:\Users\Ed\Documents\Visual Studio 2015\Projects\C#\Legalizace\LEGAL\LEGAL\bin\Debug\LEGAL.pdb
+C:\Users\Ed\Documents\Visual Studio 2015\Projects\C#\Legalizace\LEGAL\LEGAL\obj\Debug\LEGAL.csprojResolveAssemblyReference.cache
+C:\Users\Ed\Documents\Visual Studio 2015\Projects\C#\Legalizace\LEGAL\LEGAL\obj\Debug\LEGAL.Form1.resources
+C:\Users\Ed\Documents\Visual Studio 2015\Projects\C#\Legalizace\LEGAL\LEGAL\obj\Debug\LEGAL.Properties.Resources.resources
+C:\Users\Ed\Documents\Visual Studio 2015\Projects\C#\Legalizace\LEGAL\LEGAL\obj\Debug\LEGAL.csproj.GenerateResource.Cache
+C:\Users\Ed\Documents\Visual Studio 2015\Projects\C#\Legalizace\LEGAL\LEGAL\obj\Debug\LEGAL.exe
+C:\Users\Ed\Documents\Visual Studio 2015\Projects\C#\Legalizace\LEGAL\LEGAL\obj\Debug\LEGAL.pdb
+C:\Users\ed\Visual Studio\С#\Legalizace\LEGAL\LEGAL\bin\Debug\LEGAL.exe.config
+C:\Users\ed\Visual Studio\С#\Legalizace\LEGAL\LEGAL\bin\Debug\LEGAL.exe
+C:\Users\ed\Visual Studio\С#\Legalizace\LEGAL\LEGAL\bin\Debug\LEGAL.pdb
+C:\Users\ed\Visual Studio\С#\Legalizace\LEGAL\LEGAL\obj\Debug\LEGAL.csproj.ResolveComReference.cache
+C:\Users\ed\Visual Studio\С#\Legalizace\LEGAL\LEGAL\obj\Debug\LEGAL.Form1.resources
+C:\Users\ed\Visual Studio\С#\Legalizace\LEGAL\LEGAL\obj\Debug\LEGAL.Properties.Resources.resources
+C:\Users\ed\Visual Studio\С#\Legalizace\LEGAL\LEGAL\obj\Debug\LEGAL.csproj.GenerateResource.Cache
+C:\Users\ed\Visual Studio\С#\Legalizace\LEGAL\LEGAL\obj\Debug\LEGAL.csproj.CoreCompileInputs.cache
+C:\Users\ed\Visual Studio\С#\Legalizace\LEGAL\LEGAL\obj\Debug\LEGAL.exe
+C:\Users\ed\Visual Studio\С#\Legalizace\LEGAL\LEGAL\obj\Debug\LEGAL.pdb
+C:\Users\ed\Visual Studio\С#\Legalizace\LEGAL\LEGAL\obj\Debug\LEGAL.Form2.resources
+C:\Users\ed\Visual Studio\С#\Legalizace\LEGAL\LEGAL\bin\Debug\Dapper.dll
+C:\Users\ed\Visual Studio\С#\Legalizace\LEGAL\LEGAL\bin\Debug\Dapper.xml
+C:\Users\ed\Visual Studio\С#\Legalizace\LEGAL\LEGAL\obj\Debug\LEGAL.csprojResolveAssemblyReference.cache
+C:\Users\ed\Visual Studio\С#\Legalizace\LEGAL\LEGAL\obj\Debug\LEGAL.Form3.resources
+C:\С#\Legalizace\LEGAL\LEGAL\obj\Debug\LEGAL.csproj.ResolveComReference.cache
+C:\С#\Legalizace\LEGAL\LEGAL\obj\Debug\LEGAL.Form1.resources
+C:\С#\Legalizace\LEGAL\LEGAL\obj\Debug\LEGAL.Form2.resources
+C:\С#\Legalizace\LEGAL\LEGAL\obj\Debug\LEGAL.Form3.resources
+C:\С#\Legalizace\LEGAL\LEGAL\obj\Debug\LEGAL.Properties.Resources.resources
+C:\С#\Legalizace\LEGAL\LEGAL\obj\Debug\LEGAL.csproj.GenerateResource.cache
+C:\С#\Legalizace\LEGAL\LEGAL\obj\Debug\LEGAL.csproj.CoreCompileInputs.cache
+C:\С#\Legalizace\LEGAL\LEGAL\obj\Debug\LEGAL.exe
+C:\С#\Legalizace\LEGAL\LEGAL\obj\Debug\LEGAL.pdb
+C:\С#\Legalizace\LEGAL\LEGAL\bin\Debug\LEGAL.exe.config
+C:\С#\Legalizace\LEGAL\LEGAL\bin\Debug\LEGAL.exe
+C:\С#\Legalizace\LEGAL\LEGAL\bin\Debug\LEGAL.pdb
+C:\С#\Legalizace\LEGAL\LEGAL\bin\Debug\Dapper.dll
+C:\С#\Legalizace\LEGAL\LEGAL\bin\Debug\Dapper.xml
+C:\С#\Legalizace\LEGAL\LEGAL\obj\Debug\LEGAL.csproj.CopyComplete
+C:\С#\Legalizace\LEGAL\LEGAL\obj\Debug\LEGAL.Form5.resources
+C:\С#\Legalizace\LEGAL\LEGAL\obj\Debug\LEGAL.Form6.resources
+C:\С#\Legalizace\LEGAL\LEGAL\bin\Debug\DocumentFormat.OpenXml.dll
+C:\С#\Legalizace\LEGAL\LEGAL\bin\Debug\System.IO.FileSystem.Primitives.dll
+C:\С#\Legalizace\LEGAL\LEGAL\bin\Debug\System.IO.Packaging.dll
+C:\С#\Legalizace\LEGAL\LEGAL\bin\Debug\DocumentFormat.OpenXml.xml
+C:\С#\Legalizace\LEGAL\LEGAL\obj\Debug\LEGAL.csprojAssemblyReference.cache

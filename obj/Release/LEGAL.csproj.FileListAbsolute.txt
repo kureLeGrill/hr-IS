@@ -1,0 +1,37 @@
+C:\Users\ed\Visual Studio\С#\Legalizace\LEGAL\LEGAL\bin\Release\LEGAL.exe.config
+C:\Users\ed\Visual Studio\С#\Legalizace\LEGAL\LEGAL\bin\Release\LEGAL.exe
+C:\Users\ed\Visual Studio\С#\Legalizace\LEGAL\LEGAL\bin\Release\LEGAL.pdb
+C:\Users\ed\Visual Studio\С#\Legalizace\LEGAL\LEGAL\obj\Release\LEGAL.csprojResolveAssemblyReference.cache
+C:\Users\ed\Visual Studio\С#\Legalizace\LEGAL\LEGAL\obj\Release\LEGAL.csproj.ResolveComReference.cache
+C:\Users\ed\Visual Studio\С#\Legalizace\LEGAL\LEGAL\obj\Release\LEGAL.Form1.resources
+C:\Users\ed\Visual Studio\С#\Legalizace\LEGAL\LEGAL\obj\Release\LEGAL.Properties.Resources.resources
+C:\Users\ed\Visual Studio\С#\Legalizace\LEGAL\LEGAL\obj\Release\LEGAL.csproj.GenerateResource.Cache
+C:\Users\ed\Visual Studio\С#\Legalizace\LEGAL\LEGAL\obj\Release\LEGAL.csproj.CoreCompileInputs.cache
+C:\Users\ed\Visual Studio\С#\Legalizace\LEGAL\LEGAL\obj\Release\LEGAL.exe
+C:\Users\ed\Visual Studio\С#\Legalizace\LEGAL\LEGAL\obj\Release\LEGAL.pdb
+C:\Users\ed\Visual Studio\С#\Legalizace\LEGAL\LEGAL\bin\Release\Dapper.dll
+C:\Users\ed\Visual Studio\С#\Legalizace\LEGAL\LEGAL\bin\Release\Dapper.xml
+C:\Users\ed\Visual Studio\С#\Legalizace\LEGAL\LEGAL\obj\Release\LEGAL.Form2.resources
+C:\Users\ed\Visual Studio\С#\Legalizace\LEGAL\LEGAL\obj\Release\LEGAL.Form3.resources
+C:\С#\Legalizace\LEGAL\LEGAL\obj\Release\LEGAL.csprojAssemblyReference.cache
+C:\С#\Legalizace\LEGAL\LEGAL\obj\Release\LEGAL.csproj.ResolveComReference.cache
+C:\С#\Legalizace\LEGAL\LEGAL\obj\Release\LEGAL.Form1.resources
+C:\С#\Legalizace\LEGAL\LEGAL\obj\Release\LEGAL.Form2.resources
+C:\С#\Legalizace\LEGAL\LEGAL\obj\Release\LEGAL.Form3.resources
+C:\С#\Legalizace\LEGAL\LEGAL\obj\Release\LEGAL.Properties.Resources.resources
+C:\С#\Legalizace\LEGAL\LEGAL\obj\Release\LEGAL.csproj.GenerateResource.cache
+C:\С#\Legalizace\LEGAL\LEGAL\obj\Release\LEGAL.csproj.CoreCompileInputs.cache
+C:\С#\Legalizace\LEGAL\LEGAL\obj\Release\LEGAL.exe
+C:\С#\Legalizace\LEGAL\LEGAL\obj\Release\LEGAL.pdb
+C:\С#\Legalizace\LEGAL\LEGAL\bin\Release\LEGAL.exe.config
+C:\С#\Legalizace\LEGAL\LEGAL\bin\Release\LEGAL.exe
+C:\С#\Legalizace\LEGAL\LEGAL\bin\Release\LEGAL.pdb
+C:\С#\Legalizace\LEGAL\LEGAL\bin\Release\Dapper.dll
+C:\С#\Legalizace\LEGAL\LEGAL\bin\Release\Dapper.xml
+C:\С#\Legalizace\LEGAL\LEGAL\obj\Release\LEGAL.csproj.CopyComplete
+C:\С#\Legalizace\LEGAL\LEGAL\obj\Release\LEGAL.Form5.resources
+C:\С#\Legalizace\LEGAL\LEGAL\obj\Release\LEGAL.Form6.resources
+C:\С#\Legalizace\LEGAL\LEGAL\bin\Release\DocumentFormat.OpenXml.dll
+C:\С#\Legalizace\LEGAL\LEGAL\bin\Release\System.IO.FileSystem.Primitives.dll
+C:\С#\Legalizace\LEGAL\LEGAL\bin\Release\System.IO.Packaging.dll
+C:\С#\Legalizace\LEGAL\LEGAL\bin\Release\DocumentFormat.OpenXml.xml
