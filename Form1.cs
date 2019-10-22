@@ -92,6 +92,7 @@ namespace LEGAL
             object templateForPlUmova = filePath + "\\Templates\\HellOfADrug\\umowa.docx";
             object templateForPlAneks = filePath + "\\Templates\\HellOfADrug\\AneksPl.docx";
             object templateForCestjak = filePath + "\\Templates\\HellOfADrug\\CESTAK.docx";
+            object templateForInformCard = filePath + "\\Templates\\HellOfADrug\\CESTAK.docx";
 
             ////-----------Бельгийские шаблоны-----------////
             object templateForBelSmlouva = filePath + "\\Templates\\HellOfADrug\\nlUmowa.docx";
