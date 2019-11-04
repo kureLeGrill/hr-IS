@@ -92,7 +92,7 @@ namespace LEGAL
             object templateForPlUmova = filePath + "\\Templates\\HellOfADrug\\umowa.docx";
             object templateForPlAneks = filePath + "\\Templates\\HellOfADrug\\AneksPl.docx";
             object templateForCestjak = filePath + "\\Templates\\HellOfADrug\\CESTAK.docx";
-            object templateForInformCard = filePath + "\\Templates\\HellOfADrug\\CESTAK.docx";
+            object templateForInformCard = filePath + "\\Templates\\HellOfADrug\\informace_o_nastupu.docx";
 
             ////-----------Бельгийские шаблоны-----------////
             object templateForBelSmlouva = filePath + "\\Templates\\HellOfADrug\\nlUmowa.docx";
@@ -260,12 +260,15 @@ namespace LEGAL
                             TakeDataFromExcelPutItToWord(ztmp, arrForPlCompanyInformation, templateForBelSmlouvaPl);
                             TakeDataFromExcelPutItToWord(ztmp, arrForPlCompanyInformation, templateForPlAneks);
                             TakeDataFromExcelPutItToWord(ztmp, arrForPlCompanyInformation, templateForCestjak);
-                        }else
+                        }
+                        else
                         {
                             TakeDataFromExcelPutItToWord(ztmp, arrForPlCompanyInformation, templateForCzSmlouva);
                             TakeDataFromExcelPutItToWord(ztmp, arrForPlCompanyInformation, templateForPlUmova);
                             TakeDataFromExcelPutItToWord(ztmp, arrForPlCompanyInformation, templateForPlAneks);
                             TakeDataFromExcelPutItToWord(ztmp, arrForPlCompanyInformation, templateForCestjak);
+                            TakeDataFromExcelPutItToWord(ztmp, arrForPlCompanyInformation, templateForInformCard);
+                            
                         }
 
                             
@@ -387,7 +390,7 @@ namespace LEGAL
                 
                 string zzz = Convert.ToString(jj.Next(1,1000));
 
-                if (!checkBox1.Checked)
+                if (!checkBox1.Checked)  
                 {
                     if (!Directory.Exists(filePath + "\\Fresh L\\" + tmpForData[1] + "_" + tmpForData[3])) // проверяем если есть папка, чисто по логике не должно быть, по-этому сразу можно сохранять туда smlovuCZ
                     {
@@ -406,8 +409,6 @@ namespace LEGAL
 
                         if (checkCountry(ztmp[4]) == Countries[3])
                         {
-                            
-
                             docMy.SaveAs2(FilePathForFakturaNL, missingMy, missingMy, missingMy);
 
                             //MessageBox.Show("Files Are Created!");
@@ -442,7 +443,7 @@ namespace LEGAL
                         }
                         else
                         {
-                            if(!File.Exists(filePath + "\\Fresh L\\" + tmpForData[1] + "_" + tmpForData[3] + "\\AnexPl" + tmpForData[15] + ".docx"))
+                            if (!File.Exists(filePath + "\\Fresh L\\" + tmpForData[1] + "_" + tmpForData[3] + "\\AnexPl" + tmpForData[15] + ".docx"))
                             {
                                 object FilePathForFaktura = (object)filePath + "\\Fresh L\\" + tmpForData[1] + "_" + tmpForData[3] + "\\AnexPl" + tmpForData[15] + ".docx";
 
@@ -453,12 +454,22 @@ namespace LEGAL
                                 appMy.Quit(false, false, false);
                                 System.Runtime.InteropServices.Marshal.ReleaseComObject(appMy);
                             }
-                            else
+                            else if (!File.Exists(filePath + "\\Fresh L\\" + tmpForData[1] + "_" + tmpForData[3] + "\\CESTAK" + tmpForData[15] + "_" + tmpForData[3] + ".docx"))
                             {
                                 object FilePathForFaktura = (object)filePath + "\\Fresh L\\" + tmpForData[1] + "_" + tmpForData[3] + "\\CESTAK" + tmpForData[15] + "_" + tmpForData[3] + ".docx";
 
                                 docMy.SaveAs2(FilePathForFaktura, missingMy, missingMy, missingMy);
-                                
+
+                                //MessageBox.Show("Files Are Created!");
+                                docMy.Close(false, missingMy, missingMy);
+                                appMy.Quit(false, false, false);
+                                System.Runtime.InteropServices.Marshal.ReleaseComObject(appMy);
+                            } else
+                            {
+                                object FilePathForFaktura = (object)filePath + "\\Fresh L\\" + tmpForData[1] + "_" + tmpForData[3] + "\\INFORMAČNÍ" + " " + "KARTA " + tmpForData[1] + "_" + tmpForData[3] + ".docx";
+
+                                docMy.SaveAs2(FilePathForFaktura, missingMy, missingMy, missingMy);
+
                                 //MessageBox.Show("Files Are Created!");
                                 docMy.Close(false, missingMy, missingMy);
                                 appMy.Quit(false, false, false);
@@ -522,6 +533,11 @@ namespace LEGAL
 
             }
         
+        private string[] SplitName(string fullName)
+        {
+            string[] nameAndSurname = fullName.Split(' ');
+            return nameAndSurname;
+        }
 
         private string checkHours(string profName)
         {
