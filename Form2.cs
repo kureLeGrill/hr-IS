@@ -46,7 +46,7 @@ namespace LEGAL
       
 
 
-       PlCompany[] plCompanysArr = new PlCompany[5];
+       PlCompany[] plCompanysArr = new PlCompany[6];
        PovolaniDict[] povolaniDictArr = new PovolaniDict[28];
         
        //public 
@@ -73,7 +73,7 @@ namespace LEGAL
             plCompanysArr[2].region = 362256288;
             plCompanysArr[2].krs = 0000571220;
             plCompanysArr[2].nip = 8971812213;
-            plCompanysArr[2].representant = "Gavrikov Pavel";
+            plCompanysArr[2].representant = "Larysa Kudinova";
 
             plCompanysArr[3].name = "VENEZIA SP.Z O.O";
             plCompanysArr[3].adress = "Wrocławiu 50-148 przy ul. Wita Stwosza 16";
@@ -88,6 +88,13 @@ namespace LEGAL
             plCompanysArr[4].krs = 0000702537;
             plCompanysArr[4].nip = 8971847803;
             plCompanysArr[4].representant = "Yulia Polizhak";
+
+            plCompanysArr[5].name = "WOX SP.Z O.O";
+            plCompanysArr[5].adress = "Wrocławiu 50-148 przy ul. Wita Stwosza 16";
+            plCompanysArr[5].region = 382915864;
+            plCompanysArr[5].krs = 0000778713;
+            plCompanysArr[5].nip = 8971865149;
+            plCompanysArr[5].representant = "Yevgeniy Nam";
 
             PlCompany PlCompanyTuChtoOtdam;
             PlCompanyTuChtoOtdam.name = "Pdd";
@@ -147,6 +154,16 @@ namespace LEGAL
                 PlCompanyTuChtoOtdam.representant = plCompanysArr[4].representant;
             }
 
+            if (comboBoxForOldCompany.Text == "WOX SP.Z O.O")
+            {
+                PlCompanyTuChtoOtdam.name = plCompanysArr[5].name;
+                PlCompanyTuChtoOtdam.adress = plCompanysArr[5].adress;
+                PlCompanyTuChtoOtdam.region = plCompanysArr[5].region;
+                PlCompanyTuChtoOtdam.krs = plCompanysArr[5].krs;
+                PlCompanyTuChtoOtdam.nip = plCompanysArr[5].nip;
+                PlCompanyTuChtoOtdam.representant = plCompanysArr[5].representant;
+            }
+
             return PlCompanyTuChtoOtdam;
 
         }
@@ -174,6 +191,7 @@ namespace LEGAL
             plCompanysName.Add("PORTOFINO SP.Z O.O");
             plCompanysName.Add("POLFIZ SP.Z O.O");
             plCompanysName.Add("PANAMERA SP.Z O.O");
+            plCompanysName.Add("WOX SP.Z O.O");
 
             for (int i = 0; i < plCompanysName.Count; i++)
             {

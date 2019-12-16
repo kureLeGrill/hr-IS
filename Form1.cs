@@ -92,7 +92,8 @@ namespace LEGAL
             object templateForPlUmova = filePath + "\\Templates\\HellOfADrug\\umowa.docx";
             object templateForPlAneks = filePath + "\\Templates\\HellOfADrug\\AneksPl.docx";
             object templateForCestjak = filePath + "\\Templates\\HellOfADrug\\CESTAK.docx";
-            object templateForInformCard = filePath + "\\Templates\\HellOfADrug\\informace_o_nastupu.docx";
+            object templateForInformCard = filePath + "\\Templates\\HellOfADrug\\informace_o_nastupu2.docx";
+            object templateForChangeInformation = filePath + "\\Templates\\HellOfADrug\\informace_o_zmene_ci_ukonceni.docx";
 
             ////-----------Бельгийские шаблоны-----------////
             object templateForBelSmlouva = filePath + "\\Templates\\HellOfADrug\\nlUmowa.docx";
@@ -101,18 +102,18 @@ namespace LEGAL
             string connectionString = ConfigurationManager.ConnectionStrings["LEGAL.Properties.Settings.WorkDBFirstTryConnectionString"].ConnectionString; //строка подключения
 
             int maxNumbWorkers = countPeopleInExcelFile() - 1;
-            string[] ztmp = new string[15];
+            string[] ztmp = new string[19];
             string[] arrForPlCompanyInformation = new string[8];
 
             for (int i = 0; i<maxNumbWorkers;i++)
             {
                 ztmp = readExcel(i);
 
-                if(ztmp[6] == "PORTOFINO SP.Z O.O" || ztmp[6] == "VENEZIA SP.Z O.O" || ztmp[6] == "AGRAT SP.Z O.O" || ztmp[6] == "POLFIZ SP.Z O.O" || AllMethods.checkSpaceInFolderName(ztmp[1]) || ztmp[7]!=null) 
+                if(ztmp[9] == "PORTOFINO SP.Z O.O" || ztmp[9] == "VENEZIA SP.Z O.O" || ztmp[9] == "AGRAT SP.Z O.O" || ztmp[9] == "POLFIZ SP.Z O.O" || AllMethods.checkSpaceInFolderName(ztmp[1]) || ztmp[10]!=null) 
                 {
                     SqlConnection connection = new SqlConnection(connectionString);
                     //SqlConnection connect = conn.OpenSqlConn(connectionString);
-                    string sqlExpressionForFindingCz = "SELECT CompanyName, CompanyAdress, CompanyRegion, CompanyKRS, CompanyNIP, CompanyRepresentant, CertifikatNumber, CertifikatDate FROM CompaniesPL where CompanyName = (N'" + ztmp[6] + "')";
+                    string sqlExpressionForFindingCz = "SELECT CompanyName, CompanyAdress, CompanyRegion, CompanyKRS, CompanyNIP, CompanyRepresentant, CertifikatNumber, CertifikatDate FROM CompaniesPL where CompanyName = (N'" + ztmp[9] + "')";
 
                     // vot tu oshibka byla connection.ConnectionString = connectionString;
                     connection.Open();
@@ -141,23 +142,25 @@ namespace LEGAL
                     ReaderReadDataFromCommandForGettingAllInformationForPlCompany.Close();
                     connection.Close();
 
-                    if (ztmp[5] == null)
+                    if (ztmp[8] == null)
                     {
                         
                        //connection = conn.OpenSqlConn(connectionString);
                         
                         
                         SqlConnection connectionTwo = new SqlConnection();
-                        string SqlExpressionForFindingAddressIfItsNull = "Select CompanyAddress from CompanyCustomers where CompanyName = @test"; //  "(N'" + ztmp[4] + "')";
+                        string SqlExpressionForFindingAddressIfItsNull = "Select CompanyAddress, CompanyIC, CompanyRepresentant from CompanyCustomers where CompanyName = @test"; //  "(N'" + ztmp[4] + "')";
                         connectionTwo.ConnectionString = connectionString;
                         connectionTwo.Open();
                         SqlCommand CommandToGetAdress = new SqlCommand(SqlExpressionForFindingAddressIfItsNull, connectionTwo);
-                        CommandToGetAdress.Parameters.AddWithValue("@test",ztmp[4]);
+                        CommandToGetAdress.Parameters.AddWithValue("@test",ztmp[7]);
                         SqlDataReader ReaderReadDataFromCommandForGettingPlAdress = CommandToGetAdress.ExecuteReader();
 
                         while (ReaderReadDataFromCommandForGettingPlAdress.Read())
                         {
-                            ztmp[5] = Convert.ToString(ReaderReadDataFromCommandForGettingPlAdress.GetValue(0));
+                            ztmp[8] = Convert.ToString(ReaderReadDataFromCommandForGettingPlAdress.GetValue(0));
+                            ztmp[17] = Convert.ToString(ReaderReadDataFromCommandForGettingPlAdress.GetValue(1));
+                            ztmp[18] = Convert.ToString(ReaderReadDataFromCommandForGettingPlAdress.GetValue(2));
 
                         }
                         ReaderReadDataFromCommandForGettingPlAdress.Close();
@@ -165,10 +168,10 @@ namespace LEGAL
                         //conn.CloseSqlConn(connection);
                     }
 
-                    if(ztmp[8] == "" || ztmp[8] == null)
+                    if(ztmp[11] == "" || ztmp[11] == null)
                     {
                         SqlConnection ConnectionForFindingPaymentPerHour = new SqlConnection();
-                        string SQlExpressionForFindingPaymentPerHour = "select Salary FROM Professions where Professions.CZ = (N'" + ztmp[7] + "')";
+                        string SQlExpressionForFindingPaymentPerHour = "select Salary FROM Professions where Professions.CZ = (N'" + ztmp[10] + "')";
                         ConnectionForFindingPaymentPerHour.ConnectionString = connectionString;
                         ConnectionForFindingPaymentPerHour.Open();
                         SqlCommand CommandToGetHours = new SqlCommand(SQlExpressionForFindingPaymentPerHour, ConnectionForFindingPaymentPerHour);
@@ -177,17 +180,17 @@ namespace LEGAL
 
                         while(reader.Read())
                         {
-                            ztmp[8] = Convert.ToString(reader.GetValue(0));
+                            ztmp[11] = Convert.ToString(reader.GetValue(0));
                         }
                         reader.Close();
                         ConnectionForFindingPaymentPerHour.Close();
 
                     }
 
-                    if(ztmp[9] == "" || ztmp[9] == null)
+                    if(ztmp[12] == "" || ztmp[12] == null)
                     {
                         SqlConnection ConnectionForPlProffesion = new SqlConnection();
-                        string SqlExpresseonForFindingProffesionInPolish = "select Pl FROM Professions where Professions.CZ = (N'" + ztmp[7] + "')";
+                        string SqlExpresseonForFindingProffesionInPolish = "select Pl FROM Professions where Professions.CZ = (N'" + ztmp[10] + "')";
                         ConnectionForPlProffesion.ConnectionString = connectionString;
                         ConnectionForPlProffesion.Open();
 
@@ -196,7 +199,7 @@ namespace LEGAL
                         SqlDataReader redaderTwo = CommandGetPlProffesion.ExecuteReader();
                         while(redaderTwo.Read())
                         {
-                            ztmp[9] = Convert.ToString(redaderTwo.GetValue(0));
+                            ztmp[12] = Convert.ToString(redaderTwo.GetValue(0));
                         }
 
                         redaderTwo.Close();
@@ -204,15 +207,15 @@ namespace LEGAL
 
                     }
 
-                    if(ztmp[10] == "" || ztmp[10] == null)
+                    if(ztmp[13] == "" || ztmp[13] == null)
                     {
-                        ztmp[10] = DateTime.Now.ToString("dd/M/yyyy");
+                        ztmp[13] = DateTime.Now.ToString("dd/M/yyyy");
                     }
 
-                    if(ztmp[11] == "" || ztmp[11] == null)
+                    if(ztmp[14] == "" || ztmp[14] == null)
                     {
                         SqlConnection ConnectionForFindingPlProffesionInCaps = new SqlConnection();
-                        string SqlExpressionDorFindingProffesionInPolishCaps = "select Pl FROM Professions where Professions.CZ = (N'" + ztmp[7] + "')";
+                        string SqlExpressionDorFindingProffesionInPolishCaps = "select Pl FROM Professions where Professions.CZ = (N'" + ztmp[10] + "')";
                         ConnectionForFindingPlProffesionInCaps.ConnectionString = connectionString;
                         ConnectionForFindingPlProffesionInCaps.Open();
 
@@ -223,38 +226,36 @@ namespace LEGAL
                         {
                             string jonh = Convert.ToString(redaderTwo.GetValue(0));
 
-                            ztmp[11] = jonh.ToUpper();
+                            ztmp[14] = jonh.ToUpper();
                         }
 
                         redaderTwo.Close();
                         ConnectionForFindingPlProffesionInCaps.Close();
                     }
 
-                    ztmp[14] = "zagluskaEsliPusto";
+                    ztmp[22] = "zagluskaEsliPusto";
 
-                    if(checkCountry(ztmp[4]) == Countries[3])
+                    if(checkCountry(ztmp[7]) == Countries[3])
                     {
                         string NlProffession;
                         SqlConnection ConnectionForFindingNlProffession = new SqlConnection();
-                        string SqlExpressionDorFindingProffesionInPolishCaps = "select Nl FROM Professions where Professions.Cz = (N'" + ztmp[7] + "')";
+                        string SqlExpressionDorFindingProffesionInPolishCaps = "select Nl FROM Professions where Professions.Cz = (N'" + ztmp[10] + "')";
                         ConnectionForFindingNlProffession.ConnectionString = connectionString;
                         ConnectionForFindingNlProffession.Open();
                         SqlCommand CommandToGetNlProffession = new SqlCommand(SqlExpressionDorFindingProffesionInPolishCaps, ConnectionForFindingNlProffession);
                         object ObjectForGettingNlProffession = CommandToGetNlProffession.ExecuteScalar();
                         NlProffession = ObjectForGettingNlProffession.ToString();
 
-                        ztmp[14] = NlProffession;
+                        ztmp[22] = NlProffession;
                         
 
                     }
-
-
 
                     ///////начинаем вставлять, шаблоны их три штуки
                     ///
                     if (!checkBox1.Checked)
                     {
-                        if (checkCountry(ztmp[4])== Countries[3])
+                        if (checkCountry(ztmp[7]) == Countries[3])
                         {
                             TakeDataFromExcelPutItToWord(ztmp, arrForPlCompanyInformation, templateForBelSmlouva);
                             TakeDataFromExcelPutItToWord(ztmp, arrForPlCompanyInformation, templateForBelSmlouvaPl);
@@ -268,19 +269,19 @@ namespace LEGAL
                             TakeDataFromExcelPutItToWord(ztmp, arrForPlCompanyInformation, templateForPlAneks);
                             TakeDataFromExcelPutItToWord(ztmp, arrForPlCompanyInformation, templateForCestjak);
                             TakeDataFromExcelPutItToWord(ztmp, arrForPlCompanyInformation, templateForInformCard);
-                            
-                        }
+                            TakeDataFromExcelPutItToWord(ztmp, arrForPlCompanyInformation, templateForChangeInformation);
 
-                            
+                        }
+       
                     }
                     else
                     {
                         TakeDataFromExcelPutItToWord(ztmp, arrForPlCompanyInformation, templateForCestjak);
-                    }
+                    } 
 
                 }else
                 {
-                    MessageBox.Show("Проверь PL название фирмы и только один пробел должен быть между именем и фамилией.");
+                    MessageBox.Show("Проверь PL название фирмы и только один пробел должен быть между именем и фамилией. Проверьте если введена профессия если хотите жить.");
                     break;
                 }   
                 
@@ -327,62 +328,76 @@ namespace LEGAL
               
 
 
-                appMy.Selection.Find.Execute("<zzz>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[0], 2);
+                //////////appMy.Selection.Find.Execute("<zzz>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[0], 2);
                 appMy.Selection.Find.Execute("<surname>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[1], 2);
                 appMy.Selection.Find.Execute("<dateOfBirth>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[2], 2);
                 appMy.Selection.Find.Execute("<passNumber>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[3], 2);
-                appMy.Selection.Find.Execute("<companyCz>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[4], 2);
-                appMy.Selection.Find.Execute("<companyCzAddress>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[5], 2);
-                appMy.Selection.Find.Execute("<PlCompanyNameIfFull>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[6], 2);
-                appMy.Selection.Find.Execute("<employmentCz>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[7], 2);
-                //appMy.Selection.Find.Execute("<hoursPerMounth>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[8], 2);
-                appMy.Selection.Find.Execute("<employmentPL>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[9], 2);
-                //appMy.Selection.Find.Execute("<AddressOfLivingDontUSe>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[10], 2);
-                appMy.Selection.Find.Execute("<dateOfStartWorkig>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[10], 2); //лишняя надо убрать
-                appMy.Selection.Find.Execute("<workPlCestjak>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[11], 2);
-                appMy.Selection.Find.Execute("<PlCompanyName>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[15], 2);
-                appMy.Selection.Find.Execute("<PlCompanyAddress>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[16], 2);
-                appMy.Selection.Find.Execute("<REGON>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[17], 2);
-                appMy.Selection.Find.Execute("<KRS>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[18], 2);
-                appMy.Selection.Find.Execute("<NIP>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[19], 2);
-                appMy.Selection.Find.Execute("<Representant>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[20], 2);// + отсюда дописываю сегодняшнее инфо
-                appMy.Selection.Find.Execute("<CertifikateNumber>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[21], 2);// + отсюда дописываю сегодняшнее инфо
-                appMy.Selection.Find.Execute("<CertifikateDate>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[22], 2);// + отсюда дописываю сегодняшнее инфо
-                appMy.Selection.Find.Execute("<employmentNl>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[14], 2);// + отсюда дописываю сегодняшнее инфо
+                appMy.Selection.Find.Execute("<placeOfBirth>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[4], 2);
+                appMy.Selection.Find.Execute("<organ>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[5], 2);
+                appMy.Selection.Find.Execute("<gender>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[6], 2);
 
+                appMy.Selection.Find.Execute("<companyCz>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[7], 2);
+                appMy.Selection.Find.Execute("<companyCzAddress>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[8], 2);
+                appMy.Selection.Find.Execute("<PlCompanyNameIfFull>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[9], 2);
+                appMy.Selection.Find.Execute("<employmentCz>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[10], 2);
+                //appMy.Selection.Find.Execute("<hoursPerMounth>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[8], 2);
+                appMy.Selection.Find.Execute("<employmentPL>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[12], 2);
+                //appMy.Selection.Find.Execute("<AddressOfLivingDontUSe>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[10], 2);
+                appMy.Selection.Find.Execute("<dateOfStartWorkig>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[13], 2); //лишняя надо убрать
+                appMy.Selection.Find.Execute("<workPlCestjak>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[14], 2);
+
+                appMy.Selection.Find.Execute("<realSurname>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[15], 2);
+                appMy.Selection.Find.Execute("<realName>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[16], 2);
                 
-                if (checkCountry(tmpForData[4]) == Countries[1])
+                appMy.Selection.Find.Execute("<companyClientIc>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[17], 2);
+                appMy.Selection.Find.Execute("<companyClientPerson>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[18], 2);
+
+                appMy.Selection.Find.Execute("<PlCompanyName>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[24], 2);
+                appMy.Selection.Find.Execute("<PlCompanyAddress>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[25], 2);
+                appMy.Selection.Find.Execute("<REGON>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[26], 2);
+                appMy.Selection.Find.Execute("<KRS>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[27], 2);
+                appMy.Selection.Find.Execute("<NIP>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[28], 2);
+                appMy.Selection.Find.Execute("<Representant>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[29], 2);// + отсюда дописываю сегодняшнее инфо
+                appMy.Selection.Find.Execute("<CertifikateNumber>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[30], 2);// + отсюда дописываю сегодняшнее инфо
+                appMy.Selection.Find.Execute("<CertifikateDate>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[31], 2);// + отсюда дописываю сегодняшнее инфо
+
+                appMy.Selection.Find.Execute("<employmentNl>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[22], 2);// + отсюда дописываю сегодняшнее инфо
+                appMy.Selection.Find.Execute("<postalAddress>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[21], 2);// + отсюда дописываю сегодняшнее инфо
+                appMy.Selection.Find.Execute("<placeOfWork>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[23], 2);
+                appMy.Selection.Find.Execute("<ic>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[28], 2);
+
+                if (checkCountry(tmpForData[7]) == Countries[1])
                 {
                     appMy.Selection.Find.Execute("<CountryOfWorking>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, Convert.ToString(CountryOfWorking[4]), 2);
                 }
-                else if (checkCountry(tmpForData[4]) == Countries[2])
+                else if (checkCountry(tmpForData[7]) == Countries[2])
                 {
                     appMy.Selection.Find.Execute("<CountryOfWorking>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, Convert.ToString(CountryOfWorking[5]), 2);
                 }
-                else if (checkCountry(tmpForData[4]) == Countries[3])
+                else if (checkCountry(tmpForData[7]) == Countries[3])
                 {
                     appMy.Selection.Find.Execute("<CountryOfWorking>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, Convert.ToString(CountryOfWorking[6]), 2);
                 }
 
 
-                if (checkCountry(tmpForData[4]) == Countries[1] || checkCountry(tmpForData[4]) == Countries[2])
+                if (checkCountry(tmpForData[7]) == Countries[1] || checkCountry(tmpForData[7]) == Countries[2])
                 {                  
-                    appMy.Selection.Find.Execute("<hoursPerMounth>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, Convert.ToDouble(tmpForData[8]), 2);
+                    appMy.Selection.Find.Execute("<hoursPerMounth>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, Convert.ToDouble(tmpForData[11]), 2);
                 }
-                else if (checkCountry(tmpForData[4]) == Countries[3])
+                else if (checkCountry(tmpForData[7]) == Countries[3])
                 {
                     appMy.Selection.Find.Execute("<hoursPerMounth>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, "59", 2);
                 }
                 
-                if (ztmp[13] == "" || ztmp[13] == null)
+                if (ztmp[20] == "" || ztmp[20] == null)
                 {
-                    appMy.Selection.Find.Execute("<dateOfStartWorkigPlusTwoY>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, AllMethods.bhBjj(tmpForData[10]), 2);
+                    appMy.Selection.Find.Execute("<dateOfStartWorkigPlusTwoY>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, AllMethods.PlusTwoYears(tmpForData[13]), 2);
                 }else
                 {
-                    appMy.Selection.Find.Execute("<dateOfStartWorkigPlusTwoY>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[13], 2);
+                    appMy.Selection.Find.Execute("<dateOfStartWorkigPlusTwoY>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, tmpForData[20], 2);
                 }
 
-                
+                appMy.Selection.Find.Execute("<dateOfStartWorkingPlusThreeM>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, AllMethods.PlusThreeMounth(tmpForData[13]), 2);
                 appMy.Selection.Find.Execute("<IdDate>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, readNumber(), 2);
                 appMy.Selection.Find.Execute("<cestNumber>", missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, missingMy, date, 2);
 
@@ -403,11 +418,11 @@ namespace LEGAL
                         DirInfo.Create();
 
 
-                        object FilePathForFakturaNL = (object)PathForFolder + nlNameForSmlouva + tmpForData[15] + ".docx";
-                        object FilePathForFakturaPL = (object)PathForFolder + plNameForSmlouva + tmpForData[15] + ".docx";
+                        object FilePathForFakturaNL = (object)PathForFolder + nlNameForSmlouva + tmpForData[24] + ".docx"; //tmp 24 - this is a name of pl mother companys
+                        object FilePathForFakturaPL = (object)PathForFolder + plNameForSmlouva + tmpForData[24] + ".docx";
 
 
-                        if (checkCountry(ztmp[4]) == Countries[3])
+                        if (checkCountry(ztmp[7]) == Countries[3])
                         {
                             docMy.SaveAs2(FilePathForFakturaNL, missingMy, missingMy, missingMy);
 
@@ -429,10 +444,10 @@ namespace LEGAL
                     {
                         //папка есть значит просто сохранеем в уже созданную папку
 
-                        //проверяю уже существует файл контракта если файла контракта нет то
-                        if (!File.Exists(filePath + "\\Fresh L\\" + tmpForData[1] + "_" + tmpForData[3] + "\\UmovaPL" + tmpForData[15] + ".docx"))
+                        //проверяю уже существует файл контракта если файла контракта нет то 
+                        if (!File.Exists(filePath + "\\Fresh L\\" + tmpForData[1] + "_" + tmpForData[3] + "\\UmovaPL" + tmpForData[24] + ".docx"))
                         {
-                            object FilePathForFaktura = (object)filePath + "\\Fresh L\\" + tmpForData[1] + "_" + tmpForData[3] + "\\UmovaPL" + tmpForData[15] + ".docx";
+                            object FilePathForFaktura = (object)filePath + "\\Fresh L\\" + tmpForData[1] + "_" + tmpForData[3] + "\\UmovaPL" + tmpForData[24] + ".docx";
 
                             docMy.SaveAs2(FilePathForFaktura, missingMy, missingMy, missingMy);
 
@@ -443,9 +458,9 @@ namespace LEGAL
                         }
                         else
                         {
-                            if (!File.Exists(filePath + "\\Fresh L\\" + tmpForData[1] + "_" + tmpForData[3] + "\\AnexPl" + tmpForData[15] + ".docx"))
+                            if (!File.Exists(filePath + "\\Fresh L\\" + tmpForData[1] + "_" + tmpForData[3] + "\\AnexPl" + tmpForData[24] + ".docx"))
                             {
-                                object FilePathForFaktura = (object)filePath + "\\Fresh L\\" + tmpForData[1] + "_" + tmpForData[3] + "\\AnexPl" + tmpForData[15] + ".docx";
+                                object FilePathForFaktura = (object)filePath + "\\Fresh L\\" + tmpForData[1] + "_" + tmpForData[3] + "\\AnexPl" + tmpForData[24] + ".docx";
 
                                 docMy.SaveAs2(FilePathForFaktura, missingMy, missingMy, missingMy);
 
@@ -454,9 +469,9 @@ namespace LEGAL
                                 appMy.Quit(false, false, false);
                                 System.Runtime.InteropServices.Marshal.ReleaseComObject(appMy);
                             }
-                            else if (!File.Exists(filePath + "\\Fresh L\\" + tmpForData[1] + "_" + tmpForData[3] + "\\CESTAK" + tmpForData[15] + "_" + tmpForData[3] + ".docx"))
+                            else if (!File.Exists(filePath + "\\Fresh L\\" + tmpForData[1] + "_" + tmpForData[3] + "\\CESTAK" + tmpForData[24] + "_" + tmpForData[3] + ".docx"))
                             {
-                                object FilePathForFaktura = (object)filePath + "\\Fresh L\\" + tmpForData[1] + "_" + tmpForData[3] + "\\CESTAK" + tmpForData[15] + "_" + tmpForData[3] + ".docx";
+                                object FilePathForFaktura = (object)filePath + "\\Fresh L\\" + tmpForData[1] + "_" + tmpForData[3] + "\\CESTAK" + tmpForData[24] + "_" + tmpForData[3] + ".docx";
 
                                 docMy.SaveAs2(FilePathForFaktura, missingMy, missingMy, missingMy);
 
@@ -464,9 +479,20 @@ namespace LEGAL
                                 docMy.Close(false, missingMy, missingMy);
                                 appMy.Quit(false, false, false);
                                 System.Runtime.InteropServices.Marshal.ReleaseComObject(appMy);
-                            } else
+                            } else if(!File.Exists(filePath + "\\Fresh L\\" + tmpForData[1] + "_" + tmpForData[3] + "\\INFORMAČNÍ" + " " + "KARTA " + tmpForData[1] + "_" + tmpForData[3] + ".docx"))
                             {
                                 object FilePathForFaktura = (object)filePath + "\\Fresh L\\" + tmpForData[1] + "_" + tmpForData[3] + "\\INFORMAČNÍ" + " " + "KARTA " + tmpForData[1] + "_" + tmpForData[3] + ".docx";
+
+                                docMy.SaveAs2(FilePathForFaktura, missingMy, missingMy, missingMy);
+
+                                //MessageBox.Show("Files Are Created!");
+                                docMy.Close(false, missingMy, missingMy);
+                                appMy.Quit(false, false, false);
+                                System.Runtime.InteropServices.Marshal.ReleaseComObject(appMy);
+                            }else if(!File.Exists(filePath + "\\Fresh L\\" + tmpForData[1] + "_" + tmpForData[3] + "\\Informace o změně nebo ukončení vyslání pracovníka" + " " + tmpForData[1] + "_" + tmpForData[3] + ".docx"))
+                            {
+                                object FilePathForFaktura = (object)filePath + "\\Fresh L\\" + tmpForData[1] + "_" + tmpForData[3] + "\\Informace o změně nebo ukončení vyslání pracovníka" + " " + tmpForData[1] + "_" + tmpForData[3] + ".docx";
+                               
 
                                 docMy.SaveAs2(FilePathForFaktura, missingMy, missingMy, missingMy);
 
@@ -477,32 +503,32 @@ namespace LEGAL
                             }
 
                             
-                        }if(!File.Exists(filePath + "\\Fresh L\\" + tmpForData[1] + "_" + tmpForData[3] + "\\CESTAK" + tmpForData[15] + "_" + tmpForData[3] + ".docx") || !File.Exists(filePath + "\\Fresh L\\" + tmpForData[1] + "_" + tmpForData[3] + "\\CESTAK" + tmpForData[15] + "_" + tmpForData[3] + ".docx"))
+                        }if(!File.Exists(filePath + "\\Fresh L\\" + tmpForData[1] + "_" + tmpForData[3] + "\\CESTAK" + tmpForData[24] + "_" + tmpForData[3] + ".docx") || !File.Exists(filePath + "\\Fresh L\\" + tmpForData[1] + "_" + tmpForData[3] + "\\CESTAK" + tmpForData[24] + "_" + tmpForData[3] + ".docx"))
                         {
-                            if(checkCountry(ztmp[4]) == Countries[1])
+                            if(checkCountry(ztmp[7]) == Countries[1])
                             {
-                                using (StreamWriter sw = File.CreateText(filePath + "\\Fresh L\\" + tmpForData[1] + "_" + tmpForData[3] + "\\" + tmpForData[1] + "_"+ tmpForData[9] + "_" + tmpForData[8]+ "zl_" + checkHours(ztmp[9]) + "_" + "hours_" + "_" + tmpForData[12] + "_" + tmpForData[13] + ".txt"))
+                                using (StreamWriter sw = File.CreateText(filePath + "\\Fresh L\\" + tmpForData[1] + "_" + tmpForData[3] + "\\" + tmpForData[1] + "_"+ tmpForData[10] + "_" + tmpForData[11]+ "zl_" + checkHours(ztmp[12]) + "_" + "hours_" + "_" + tmpForData[19] + "_" + tmpForData[20] + ".txt"))
                                 {
-                                    sw.WriteLine(tmpForData[1] + "_" + tmpForData[3] + "\\" + tmpForData[1] + "_" + tmpForData[9] + "_" + tmpForData[8] + "zl" + "_" + tmpForData[12] + tmpForData[13]);
+                                    sw.WriteLine(tmpForData[1] + "_" + tmpForData[3] + "\\" + tmpForData[1] + "_" + tmpForData[9] + "_" + tmpForData[11] + "zl" + "_" + tmpForData[12] + tmpForData[13]);
                                 }
-                            }else if(checkCountry(ztmp[4]) == Countries[3])
+                            }else if(checkCountry(ztmp[7]) == Countries[3])
                                     {
-                                        using (StreamWriter sw = File.CreateText(filePath + "\\Fresh L\\" + tmpForData[1] + "_" + tmpForData[3] + "\\" + tmpForData[1] + "_" + tmpForData[9] + "_" + "59zl" + "_" + "80" + "hours_" + tmpForData[12] + "_" + tmpForData[13] + ".txt"))
+                                        using (StreamWriter sw = File.CreateText(filePath + "\\Fresh L\\" + tmpForData[1] + "_" + tmpForData[3] + "\\" + tmpForData[1] + "_" + tmpForData[10] + "_" + "59zl" + "_" + "80" + "hours_" + tmpForData[19] + "_" + tmpForData[20] + ".txt"))
                                              {
-                                                 sw.WriteLine(tmpForData[1] + "_" + tmpForData[3] + "\\" + tmpForData[1] + "_" + tmpForData[9] + "_" + "59zl" + "_" + tmpForData[12] + tmpForData[13]);
+                                                 sw.WriteLine(tmpForData[1] + "_" + tmpForData[3] + "\\" + tmpForData[1] + "_" + tmpForData[9] + "_" + "59zl" + "_" + tmpForData[19] + tmpForData[20]);
                                              }
                                     }
 
                         }
-
+                        
 
 
                     }
 
                 }else
                 {
-                    string pathToFolder = filePath + "\\Fresh L\\" + tmpForData[4]; // путь к папке с названием фирмы PL
-                    object FilePathForFaktura = (object)filePath + "\\Fresh L\\" + tmpForData[4] + "\\" + tmpForData[1] + "_" + tmpForData[3] + "_CESTAK.docx";
+                    string pathToFolder = filePath + "\\Fresh L\\" + tmpForData[7]; // путь к папке с названием фирмы PL
+                    object FilePathForFaktura = (object)filePath + "\\Fresh L\\" + tmpForData[7] + "\\" + tmpForData[1] + "_" + tmpForData[3] + "_CESTAK.docx";
 
                     if (!File.Exists(pathToFolder))
                     {
@@ -582,6 +608,7 @@ namespace LEGAL
         private string[] readExcel(int index)
         {
             string res = filePath + "\\Form.xlsx";
+            string[] nameAndSurnameSepar = new string[2];
             Excel.Application xlApp;
             Excel.Workbook xlWorkBook;
             Excel.Worksheet xlWorkSheet;
@@ -590,26 +617,30 @@ namespace LEGAL
             xlWorkBook = xlApp.Workbooks.Open(res, 0, true, 5, "", "", true);
             xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
             index += 2;
-            string[] data = new string[15]; //array[] = {ID, Surname, Name, DateOfBith, Passport number, CompanyCZ, CompanyPL, EmploymentCZ, EmploymentPL, ResidenceInPoland, date of start working}
+            string[] data = new string[24]; //array[] = {ID, Surname, Name, DateOfBith, Passport number, CompanyCZ, CompanyPL, EmploymentCZ, EmploymentPL, ResidenceInPoland, date of start working}
             data[0] = xlWorkSheet.get_Range("A" + index.ToString()).Text;// get ID
             data[1] = xlWorkSheet.get_Range("B" + index.ToString()).Value; // get Surname and Name
-            //data[2] = xlWorkSheet.get_Range("C" + index.ToString()).Value; // get Name
             data[2] = xlWorkSheet.get_Range("C" + index.ToString()).Text;// get DateOfBith
             data[3] = xlWorkSheet.get_Range("D" + index.ToString()).Value; // get Passport number
-            data[4] = xlWorkSheet.get_Range("E" + index.ToString()).Value; // get CompanyCZ
-            data[5] = xlWorkSheet.get_Range("F" + index.ToString()).Value; // get CompanyCZAdress
-            data[6] = xlWorkSheet.get_Range("G" + index.ToString()).Value; // get CompanyPL
-            data[7] = xlWorkSheet.get_Range("H" + index.ToString()).Value; // get EmploymentCZ
-            data[8] = xlWorkSheet.get_Range("I" + index.ToString()).Text; //  Payment per hour
-            //data[9] = xlWorkSheet.get_Range("J" + index.ToString()).Text; // get hours per month
-            data[9] = xlWorkSheet.get_Range("J" + index.ToString()).Value;// get EmploymentPL
-            //data[10] = xlWorkSheet.get_Range("K" + index.ToString()).Value; // get ResidenceInPoland
-            data[10] = xlWorkSheet.get_Range("K" + index.ToString()).Text; // date of start working
-            data[11] = xlWorkSheet.get_Range("L" + index.ToString()).Text; // cestjak position pl
-            data[12] = xlWorkSheet.get_Range("M" + index.ToString()).Text; // document type
-            data[13] = xlWorkSheet.get_Range("N" + index.ToString()).Text; // viza do
-            data[14] = xlWorkSheet.get_Range("O" + index.ToString()).Text; // viza do
+            data[4] = xlWorkSheet.get_Range("E" + index.ToString()).Value; // get Place of birth
+            //data[5] = xlWorkSheet.get_Range("F" + index.ToString()).Text; // get Authority
+            data[6] = xlWorkSheet.get_Range("F" + index.ToString()).Value; // get Gender
+            data[7] = xlWorkSheet.get_Range("G" + index.ToString()).Value; // get Company Client
+            //data[8] = xlWorkSheet.get_Range("I" + index.ToString()).Text; //  Company client adrress - not a obligation
+            data[9] = xlWorkSheet.get_Range("I" + index.ToString()).Value;// get Company PL
+            data[10] = xlWorkSheet.get_Range("J" + index.ToString()).Text; // get profession of a person in cz
+            data[11] = xlWorkSheet.get_Range("K" + index.ToString()).Text; // get payment per hour
+            data[12] = xlWorkSheet.get_Range("L" + index.ToString()).Text; // profession in PL if need custom
+            data[13] = xlWorkSheet.get_Range("M" + index.ToString()).Text; // date of start working
+            data[14] = xlWorkSheet.get_Range("N" + index.ToString()).Text; // profession for cestjak
 
+            nameAndSurnameSepar = SplitName(data[1]);
+            data[15] = nameAndSurnameSepar[0];
+            data[16] = nameAndSurnameSepar[1];
+            data[19] = xlWorkSheet.get_Range("O" + index.ToString()).Text; // get dokument type
+            data[20] = xlWorkSheet.get_Range("P" + index.ToString()).Text; // get viza do
+            //data[21] = xlWorkSheet.get_Range("I" + index.ToString()).Text; // get home addresse
+            data[23] = xlWorkSheet.get_Range("H" + index.ToString()).Text; // place of work
 
             xlWorkBook.Close();
             xlApp.Quit();

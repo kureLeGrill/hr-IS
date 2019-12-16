@@ -21,7 +21,7 @@ namespace LEGAL
         {
             int spaceCounter = 0;
             char[] arrForStringFolderName;
-
+            //newFolderName.ElementAt(newFolderName.Length - 1);
             arrForStringFolderName = newFolderName.ToCharArray();
 
             for (int i = 0; i < newFolderName.Length; i++)
@@ -51,13 +51,23 @@ namespace LEGAL
         }
 
 
-        public string bhBjj(string firstDate) //function for data change by year <dateOfStartWorkigMinusDayPlusTwoY>
+        public string PlusTwoYears(string firstDate) //function for data change by year <dateOfStartWorkigMinusDayPlusTwoY>
         {
             DateTime result;
             //result = DateTime.ParseExact(firstDate, "d", null);
             result = Convert.ToDateTime(firstDate);
             result = result.AddDays(+730);
            
+            return result.ToString("dd.MM.yyyy");
+        }
+
+        public string PlusThreeMounth(string firstDate) //function for data change by year <dateOfStartWorkigMinusDayPlusTwoY>
+        {
+            DateTime result;
+            //result = DateTime.ParseExact(firstDate, "d", null);
+            result = Convert.ToDateTime(firstDate);
+            result = result.AddDays(+90);
+
             return result.ToString("dd.MM.yyyy");
         }
 
@@ -101,7 +111,7 @@ namespace LEGAL
             ddd = rand.Next();
 
 
-            object FilePathForContractCz = (object)"Y:\\Legalizace\\Fresh L\\!!!Contracts\\" + tmpForData[1] + "_" + ddd + "Smlouva.docx";
+            object FilePathForContractCz = (object)"Y:\\Legalizace\\Fresh L\\!!!Contracts\\" + tmpForData[0] + "_"+ tmpForData[4] + "_"+ ddd + "Smlouva.docx";
             doc.SaveAs2(FilePathForContractCz, missing, missing, missing);
 
             MessageBox.Show("Files Are Created!");
