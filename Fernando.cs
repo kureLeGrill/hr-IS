@@ -111,7 +111,7 @@ namespace LEGAL
             ddd = rand.Next();
 
 
-            object FilePathForContractCz = (object)"Y:\\Legalizace\\Fresh L\\!!!Contracts\\" + tmpForData[0] + "_"+ tmpForData[4] + "_"+ ddd + "Smlouva.docx";
+            object FilePathForContractCz = (object)"C:\\Legalizace\\Fresh L\\!!!Contracts\\" + tmpForData[0] + "_"+ tmpForData[4] + "_"+ ddd + "Smlouva.docx";
             doc.SaveAs2(FilePathForContractCz, missing, missing, missing);
 
             MessageBox.Show("Files Are Created!");
@@ -179,7 +179,7 @@ namespace LEGAL
         {
             if (data.Length == 17)
             {
-                object templateForFaktura = "Y:\\Legalizace\\Templates\\faktura.docx";
+                object templateForFaktura = "C:\\Legalizace\\Templates\\faktura.docx";
 
                 //now create word file into template and fill data
                 Microsoft.Office.Interop.Word.Application app = new Microsoft.Office.Interop.Word.Application();
@@ -214,7 +214,7 @@ namespace LEGAL
                 app.Selection.Find.Execute("<AllCountPrice>", missing, missing, missing, missing, missing, missing, missing, missing, tmpForData[15], 2);
                 app.Selection.Find.Execute("<PriceToWords>", missing, missing, missing, missing, missing, missing, missing, missing, tmpForData[16], 2);
 
-                object FilePathForFaktura = (object)"Y:\\Legalizace\\Faktury\\" + tmpForData[7] + "_" + tmpForData[10] + "_" + tmpForData[13] +"_"+ tmpForData[14] + "_Faktura.docx";
+                object FilePathForFaktura = (object)"C:\\Legalizace\\Faktury\\" + tmpForData[7] + "_" + tmpForData[10] + "_" + tmpForData[13] +"_"+ tmpForData[14] + "_Faktura.docx";
                 doc.SaveAs2(FilePathForFaktura, missing, missing, missing);
 
                 MessageBox.Show("Files Are Created!");
@@ -223,7 +223,7 @@ namespace LEGAL
                 System.Runtime.InteropServices.Marshal.ReleaseComObject(app);
             }
             else {
-                object templateForFakturaTrans = "Y:\\Legalizace\\Templates\\fakturaTrans.docx";
+                object templateForFakturaTrans = "C:\\Legalizace\\Templates\\fakturaTrans.docx";
 
                 //now create word file into template and fill data
                 Microsoft.Office.Interop.Word.Application app = new Microsoft.Office.Interop.Word.Application();
@@ -263,7 +263,7 @@ namespace LEGAL
                 app.Selection.Find.Execute("<AllCountPrice>", missing, missing, missing, missing, missing, missing, missing, missing, tmpForData[20], 2);
                 app.Selection.Find.Execute("<PriceToWords>", missing, missing, missing, missing, missing, missing, missing, missing, tmpForData[21], 2);
 
-                object FilePathForFaktura = (object)"Y:\\Legalizace\\Faktury\\" + tmpForData[7] + "_" + tmpForData[10] +"_"+ tmpForData[20] +"_"+ tmpForData[19] + "_Faktura.docx";
+                object FilePathForFaktura = (object)"C:\\Legalizace\\Faktury\\" + tmpForData[7] + "_" + tmpForData[10] +"_"+ tmpForData[20] +"_"+ tmpForData[19] + "_Faktura.docx";
                 doc.SaveAs2(FilePathForFaktura, missing, missing, missing);
 
                 MessageBox.Show("Files Are Created!");
